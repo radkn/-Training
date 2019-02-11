@@ -1,6 +1,7 @@
 package ua.training;
 
 import java.util.Scanner;
+import java.lang.Math;
 
 public class Controller {
 
@@ -63,11 +64,11 @@ public class Controller {
         return false;
     }
 
-    private int rand(){
+    public int rand(){
         return rand(RAND_MIN,RAND_MAX);
     }
 
-    private int rand(int min, int max){
-        return 53;
+    public int rand(int min, int max){
+        return min + (int) (Math.random() * (max-min));
     }
 }
