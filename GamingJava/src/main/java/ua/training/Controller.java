@@ -1,5 +1,8 @@
 package ua.training;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.lang.Math;
 
@@ -10,6 +13,8 @@ public class Controller {
 
     private static final int RAND_MIN = 0;
     private static final int RAND_MAX = 100;
+
+    private List<Integer> history = new ArrayList<Integer>();
 
     public Controller(Model model, View view){
         this.model = model;
@@ -23,9 +28,15 @@ public class Controller {
     public void processUser(){
         Scanner sc = new Scanner(System.in);
 
-        while (!checkSecretNumber(inputIntNumber(sc)))
+        int secretNumber;
+        while (!checkSecretNumber(secretNumber = inputIntNumber(sc))){
 
+        }
         view.printMessage(View.CONGRATULATE);
+        view.printMessage(View.SECRET_NUMBER + secretNumber);
+        view.printMessage(View.COUNT_OF_ATTEMPTS + history.size());
+        view.printMessage(View.STATISTIC);
+        view.printIntegerListValue(history);
     }
 
     private int inputIntNumber(Scanner sc){
@@ -52,6 +63,7 @@ public class Controller {
 
     private boolean checkSecretNumber(int inputNumber){
 
+        history.add(inputNumber);
         if(inputNumber == model.getSecretNumber()){
             return true;
         } else if ( inputNumber > model.getSecretNumber()){
