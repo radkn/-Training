@@ -15,7 +15,7 @@ public class View {
     public static final String BIG_INPUT_DATA =
             "Your number is more than a secret number.";
     public static final String CONGRATULATE =
-            "You guessed. Сongratulations!";
+            "You guessed. Congratulations!";
     public static final String SECRET_NUMBER =
             "Secret number is: ";
     public static final String COUNT_OF_ATTEMPTS =

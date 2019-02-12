@@ -11,32 +11,29 @@ public class Controller {
     private Model model;
     private View view;
 
-    private static final int RAND_MIN = 0;
-    private static final int RAND_MAX = 100;
-
-    private List<Integer> history = new ArrayList<Integer>();
-
     public Controller(Model model, View view){
         this.model = model;
         this.view = view;
-
-        this.model.setSecretNumber(rand());
-        this.model.setMinBarrier(RAND_MIN);
-        this.model.setMaxBarrier(RAND_MAX);
     }
 
     public void processUser(){
         Scanner sc = new Scanner(System.in);
 
+        this.model.setSecretNumber();
         int secretNumber;
-        while (!checkSecretNumber(secretNumber = inputIntNumber(sc))){
+        while (!model.checkSecretNumber(secretNumber = inputIntNumber(sc))){
 
+            if(model.getAnswerState().equals("less")){
+                view.printMessage(View.SMALL_INPUT_DATA);
+            }else if(model.getAnswerState().equals("grater")){
+                view.printMessage(View.BIG_INPUT_DATA);
+            }
         }
         view.printMessage(View.CONGRATULATE);
         view.printMessage(View.SECRET_NUMBER + secretNumber);
-        view.printMessage(View.COUNT_OF_ATTEMPTS + history.size());
+        view.printMessage(View.COUNT_OF_ATTEMPTS + model.getHistory().size());
         view.printMessage(View.STATISTIC);
-        view.printIntegerListValue(history);
+        view.printIntegerListValue(model.getHistory());
     }
 
     private int inputIntNumber(Scanner sc){
@@ -58,29 +55,5 @@ public class Controller {
             break;
         }
         return res;
-    }
-
-
-    private boolean checkSecretNumber(int inputNumber){
-
-        history.add(inputNumber);
-        if(inputNumber == model.getSecretNumber()){
-            return true;
-        } else if ( inputNumber > model.getSecretNumber()){
-            model.setMaxBarrier(inputNumber);
-            view.printMessage(View.BIG_INPUT_DATA);
-        }else{
-            model.setMinBarrier(inputNumber);
-            view.printMessage(View.SMALL_INPUT_DATA);
-        }
-        return false;
-    }
-
-    public int rand(){
-        return rand(RAND_MIN,RAND_MAX);
-    }
-
-    public int rand(int min, int max){
-        return min + (int) (Math.random() * (max-min));
     }
 }
