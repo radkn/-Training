@@ -6,6 +6,12 @@ public class View {
 
     public static final String INPUT_DATA_FORMAT_WRONG =
             "Input data format is wrong!";
+    public static final String ENTER_DIAPASON =
+            "You ned to enter diapason of 2 number.";
+    public static final String ENTER_FIRST_NUMBER =
+            "Start number. ";
+    public static final String ENTER_SECOND_NUMBER =
+            "End number. ";
     public static final String PLEASE_ENTER_NUMBER =
             "Please enter integer number between ";
     public static final String INPUT_DATA_OUT_OF_RANGE =

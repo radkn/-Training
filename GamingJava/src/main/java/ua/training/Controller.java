@@ -15,6 +15,8 @@ public class Controller {
     public void processUser(){
         Scanner sc = new Scanner(System.in);
 
+        enterDiapason(sc);
+
         this.model.setSecretNumber();
         int secretNumber;
         while (!model.checkSecretNumber(secretNumber = inputIntNumber(sc))){
@@ -30,6 +32,14 @@ public class Controller {
         view.printMessage(View.COUNT_OF_ATTEMPTS + model.getHistory().size());
         view.printMessage(View.STATISTIC);
         view.printIntegerListValue(model.getHistory());
+    }
+
+    private void enterDiapason(Scanner sc) {
+        view.printMessage(View.ENTER_DIAPASON +"\n"+ View.ENTER_FIRST_NUMBER);
+        model.setMinBarrier(inputIntNumber(sc));
+
+        view.printMessage(View.ENTER_SECOND_NUMBER);
+        model.setMaxBarrier(inputIntNumber(sc));
     }
 
     private int inputIntNumber(Scanner sc){

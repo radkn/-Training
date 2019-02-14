@@ -11,8 +11,13 @@ public class Model {
     private List<Integer> history = new ArrayList<Integer>();
     private String answerState;
 
-    private static final int RAND_MIN = 0;
-    private static final int RAND_MAX = 100;
+    private static final int RAND_MIN = Integer.MIN_VALUE;
+    private static final int RAND_MAX = Integer.MAX_VALUE;
+
+    public Model(){
+        minBarrier = RAND_MIN;
+        maxBarrier = RAND_MAX;
+    }
 
     public boolean checkSecretNumber(int inputNumber){
 
@@ -62,9 +67,7 @@ public class Model {
     }
 
     public int rand(){
-        minBarrier = RAND_MIN;
-        maxBarrier = RAND_MAX;
-        return rand(RAND_MIN,RAND_MAX);
+        return rand(minBarrier, maxBarrier);
     }
 
     public int rand(int min, int max){
