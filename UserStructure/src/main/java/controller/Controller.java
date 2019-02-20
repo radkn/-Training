@@ -1,18 +1,20 @@
 package controller;
 
-import model.Abonent;
+import view.StringConstants;
 import view.View;
+
+import java.util.Scanner;
 
 public class Controller {
 
-    private Abonent abonent;
+    private Scanner sc;
     private View view;
     public Controller(){
-        abonent = new Abonent();
+        sc =  new Scanner(System.in);
         view = new View();
     }
 
     public void processUser(){
-        new InputAbonentNote(abonent).addAbonent();
+        new InputAbonentNote(sc,view).addAbonent();
     }
 }

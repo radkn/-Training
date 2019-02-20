@@ -1,4 +1,4 @@
-package model;
+package model.entities;
 
 public class Abonent {
     private String firstName;
@@ -114,6 +114,10 @@ public class Abonent {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getLastNameAndInitial(){
+        return lastName+" "+firstName.substring(0,1)+". ";
     }
 
     @Override
