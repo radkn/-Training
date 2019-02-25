@@ -1,21 +1,21 @@
-package model;
+package ua.training.model;
 
-import model.entities.Abonent;
+import ua.training.model.entities.Subscriber;
 
 import java.util.List;
 
 public class ModelUtility {
 
-    public void saveAbonent(Abonent abonent) throws WriteToDBException {
-        if(isNikNameAlreadyAvailable(abonent.getNikName())){
-            throw new WriteToDBException(abonent, "NikName \""+abonent.getNikName()
+    public void saveAbonent(Subscriber subscriber) throws WriteToDBException {
+        if(isNikNameAlreadyAvailable(subscriber.getNikName())){
+            throw new WriteToDBException(subscriber, "NikName \""+subscriber.getNikName()
                     +"\" is already exists! Please try to enter other nikName.");
         }
     }
 
     public boolean isNikNameAlreadyAvailable(String nikName) {
 
-        List<String> abonentsNik = FakeDBData.getListOfAbonentsNik();
+        List<String> abonentsNik = FakeDBData.getListOfSubscribersNik();
 
         for (String nik: abonentsNik){
             if(nik.equals(nikName)){

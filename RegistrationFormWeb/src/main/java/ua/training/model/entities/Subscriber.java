@@ -1,6 +1,6 @@
-package model.entities;
+package ua.training.model.entities;
 
-public class Abonent {
+public class Subscriber {
     private String firstName;
     private String lastName;
     private String fatherName;
@@ -12,18 +12,18 @@ public class Abonent {
     private String mobPhone2;
     private String email;
 
-    public Abonent() {}
+    public Subscriber() {}
 
-    public Abonent(String firstName,
-                   String lastName,
-                   String fatherName,
-                   String nikName,
-                   String comment,
-                   Group group,
-                   String homePhone,
-                   String mobPhone,
-                   String mobPhone2,
-                   String email) {
+    public Subscriber(String firstName,
+                      String lastName,
+                      String fatherName,
+                      String nikName,
+                      String comment,
+                      Group group,
+                      String homePhone,
+                      String mobPhone,
+                      String mobPhone2,
+                      String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.fatherName = fatherName;
@@ -122,11 +122,17 @@ public class Abonent {
 
     @Override
     public String toString() {
-        return "Abonent{" +
+        return "Subscriber{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", fatherName='" + fatherName + '\'' +
                 ", nikName='" + nikName + '\'' +
+                ", comment='" + comment + '\'' +
+                ", group=" + group +
+                ", homePhone='" + homePhone + '\'' +
+                ", mobPhone='" + mobPhone + '\'' +
+                ", mobPhone2='" + mobPhone2 + '\'' +
+                ", email='" + email + '\'' +
                 '}';
     }
 }

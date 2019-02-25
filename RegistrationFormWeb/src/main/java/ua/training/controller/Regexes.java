@@ -1,4 +1,4 @@
-package controller;
+package ua.training.controller;
 
 import model.entities.Group;
 

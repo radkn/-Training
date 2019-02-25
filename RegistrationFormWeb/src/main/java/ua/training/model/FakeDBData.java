@@ -1,4 +1,4 @@
-package model;
+package ua.training.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ public enum FakeDBData {
         return nik;
     }
 
-    public static List<String> getListOfAbonentsNik(){
+    public static List<String> getListOfSubscribersNik(){
         List<String> nikNameList = new ArrayList<String>();
         nikNameList.add(A1.getNik());
         nikNameList.add(A2.getNik());
