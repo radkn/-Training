@@ -15,9 +15,9 @@ public class ModelUtility {
 
     public boolean isNikNameAlreadyAvailable(String nikName) {
 
-        List<String> abonentsNik = FakeDBData.getListOfSubscribersNik();
+        List<String> subscribersNik = FakeDBData.getListOfSubscribersNik();
 
-        for (String nik: abonentsNik){
+        for (String nik: subscribersNik){
             if(nik.equals(nikName)){
                 return true;
             }

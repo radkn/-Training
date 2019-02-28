@@ -16,78 +16,68 @@ public class InputSubscriberNote {
 
     private String firstName;
     private String lastName;
-    private String fatherName;
     private String nikName;
-    private String comment;
     private Group group;
-    private String homePhone;
     private String mobPhone;
-    private String mobPhone2;
     private String email;
 
     public InputSubscriberNote(HttpServletRequest req, HttpServletResponse resp) {
         this.req = req;
         this.resp = resp;
+        this.subscriber = new Subscriber();
     }
 
 
-    public void addAbonent() {
+    public boolean addSubscriber() {
 
         System.out.println("do get main Servlet");
-        firstName = req.getParameter("firstName");
-        lastName = req.getParameter("lastName");
-        fatherName = req.getParameter("fatherName");
-        nikName = req.getParameter("nikName");
-        comment = req.getParameter("comment");
-        group = req.getParameter("group");
-        homePhone = req.getParameter("homePhone");
-        mobPhone = req.getParameter("mobPhone");
-        mobPhone2 = req.getParameter("mobPhone2");
-        email = req.getParameter("email");
 
-        Subscriber subscriber = new Subscriber();
-        subscriber.setFirstName(name);
-        subscriber.setLastName(lastName);
-        subscriber.setNikName(nikName);
-        subscriber.setEmail(email);
+        if (!inputFields()) {
+            req.setAttribute("isSubscriberAdded", false);
+            return false;
+        }
 
-        System.out.println(subscriber.toString());
-
-        firstName = inputField(Regexes.FIRST_NAME_REGEX);
-        lastName = inputField(Regexes.LAST_NAME_REGEX);
-        fatherName = inputField(Regexes.FATHER_NAME_REGEX);
-        nikName = inputField(Regexes.NIK_NAME_REGEX);
-        comment = inputField(Regexes.COMMENT_REGEX);
-        group = Group.valueOf(inputField(Regexes.GROUP_REGEX));
-        homePhone = inputField(Regexes.PHONE_HOME_REGEX);
-        mobPhone = inputField(Regexes.PHONE_MOB_REGEX);
-        mobPhone2 = inputField(Regexes.PHONE_MOB2_REGEX);
-        email = inputField(Regexes.EMAIL_REGEX);
-
-        subscriber = new Subscriber(firstName,
-                lastName,
-                fatherName,
-                nikName,
-                comment,
-                group,
-                homePhone,
-                mobPhone,
-                mobPhone2,
-                email);
-
-        while (true){
-            try {
-                new ModelUtility().saveAbonent(subscriber);
-                return;
-            }catch (WriteToDBException e) {
-                System.err.println(e.getMessage());
-                subscriber.setNikName(inputField(Regexes.NIK_NAME_REGEX));
-            }
+        req.setAttribute("isSubscriberAdded", true);
+        try {
+            new ModelUtility().saveAbonent(subscriber);
+            return true;
+        } catch (WriteToDBException e) {
+            System.err.println(e.getMessage());
+            req.setAttribute("isSubscriberAdded", false);
+            return true;
         }
     }
 
-    private String inputField(Regexes regexes) {
-        DialogueController dc = new DialogueController();
-        return "";
+    private boolean inputFields() {
+
+        subscriber.setFirstName(req.getParameter("firstName")
+                .matches(Regexes.FIRST_NAME_REGEX.getRegex()) ? req.getParameter("firstName") : "Error. " + Regexes.FIRST_NAME_REGEX.getExplanation());
+        subscriber.setLastName(req.getParameter("lastName")
+                .matches(Regexes.LAST_NAME_REGEX.getRegex()) ? req.getParameter("lastName") : "Error. " + Regexes.LAST_NAME_REGEX.getExplanation());
+        subscriber.setNikName(req.getParameter("nikName")
+                .matches(Regexes.NIK_NAME_REGEX.getRegex()) ? nikName = req.getParameter("nikName") : "Error. " + Regexes.NIK_NAME_REGEX.getExplanation());
+        subscriber.setGroup(req.getParameter("group")
+                .matches(Regexes.GROUP_REGEX.getRegex()) ? group = Group.valueOf(req.getParameter("group")) : null);
+        subscriber.setMobPhone(req.getParameter("mobPhone")
+                .matches(Regexes.PHONE_MOB_REGEX.getRegex()) ? req.getParameter("mobPhone") : "Error. " + Regexes.PHONE_MOB_REGEX.getExplanation());
+        subscriber.setEmail(req.getParameter("email")
+                .matches(Regexes.EMAIL_REGEX.getRegex()) ? req.getParameter("email") : "Error. " + Regexes.EMAIL_REGEX.getExplanation());
+
+
+        req.setAttribute("firstName", subscriber.getFirstName());
+        req.setAttribute("lastName", subscriber.getLastName());
+        req.setAttribute("nikName", subscriber.getNikName());
+        req.setAttribute("group", subscriber.getGroup());
+        req.setAttribute("mobPhone", subscriber.getMobPhone());
+        req.setAttribute("email", subscriber.getEmail());
+
+
+        return subscriber.getFirstName().startsWith("Error") &
+                subscriber.getLastName().startsWith("Error") &
+                subscriber.getNikName().startsWith("Error") &
+                subscriber.getGroup() != null &
+                subscriber.getMobPhone().startsWith("Error") &
+                subscriber.getEmail().startsWith("Error");
     }
+
 }

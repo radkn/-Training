@@ -6,15 +6,6 @@ public class WriteToDBException extends Exception {
 
     private Subscriber subscriber = new Subscriber();
 
-    public WriteToDBException(){
-
-    }
-
-    public WriteToDBException(String message){
-        super(message);
-    }
-
-
     public WriteToDBException(Subscriber subscriber, String message) {
         super(message);
         this.subscriber = subscriber;

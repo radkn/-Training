@@ -3,36 +3,31 @@ package ua.training.model.entities;
 public class Subscriber {
     private String firstName;
     private String lastName;
-    private String fatherName;
     private String nikName;
-    private String comment;
     private Group group;
-    private String homePhone;
     private String mobPhone;
-    private String mobPhone2;
     private String email;
 
-    public Subscriber() {}
+    public Subscriber() {
+        this.firstName = "";
+        this.lastName = "";
+        this.nikName = "";
+        this.group = null;
+        this.mobPhone = "";
+        this.email = "";
+    }
 
     public Subscriber(String firstName,
                       String lastName,
-                      String fatherName,
                       String nikName,
-                      String comment,
                       Group group,
-                      String homePhone,
                       String mobPhone,
-                      String mobPhone2,
                       String email) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.fatherName = fatherName;
         this.nikName = nikName;
-        this.comment = comment;
         this.group = group;
-        this.homePhone = homePhone;
         this.mobPhone = mobPhone;
-        this.mobPhone2 = mobPhone2;
         this.email = email;
     }
 
@@ -52,28 +47,12 @@ public class Subscriber {
         this.lastName = lastName;
     }
 
-    public String getFatherName() {
-        return fatherName;
-    }
-
-    public void setFatherName(String fatherName) {
-        this.fatherName = fatherName;
-    }
-
     public String getNikName() {
         return nikName;
     }
 
     public void setNikName(String nikName) {
         this.nikName = nikName;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
     }
 
     public Group getGroup() {
@@ -84,28 +63,12 @@ public class Subscriber {
         this.group = group;
     }
 
-    public String getHomePhone() {
-        return homePhone;
-    }
-
-    public void setHomePhone(String homePhone) {
-        this.homePhone = homePhone;
-    }
-
     public String getMobPhone() {
         return mobPhone;
     }
 
     public void setMobPhone(String mobPhone) {
         this.mobPhone = mobPhone;
-    }
-
-    public String getMobPhone2() {
-        return mobPhone2;
-    }
-
-    public void setMobPhone2(String mobPhone2) {
-        this.mobPhone2 = mobPhone2;
     }
 
     public String getEmail() {
@@ -125,13 +88,9 @@ public class Subscriber {
         return "Subscriber{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", fatherName='" + fatherName + '\'' +
                 ", nikName='" + nikName + '\'' +
-                ", comment='" + comment + '\'' +
                 ", group=" + group +
-                ", homePhone='" + homePhone + '\'' +
                 ", mobPhone='" + mobPhone + '\'' +
-                ", mobPhone2='" + mobPhone2 + '\'' +
                 ", email='" + email + '\'' +
                 '}';
     }
